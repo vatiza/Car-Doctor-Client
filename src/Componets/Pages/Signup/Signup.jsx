@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import loginimg from "../../../assets/images/login/login.svg";
-const Login = () => {
-  const handleLogin = (event) => {
+const Signup = () => {
+  const handleSignup = (event) => {
     event.preventDefault();
     const form = event.target;
+    const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const loginValue = { email, password };
+    const loginValue = { name, email, password };
     console.log(loginValue);
   };
   return (
@@ -17,16 +18,16 @@ const Login = () => {
             <img src={loginimg} alt="" />
           </div>
           <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleLogin} className="card-body">
-              <h1 className="text-3xl font-bold">Login now!</h1>
+            <form onSubmit={handleSignup} className="card-body">
+              <h1 className="text-3xl font-bold">Sign Up</h1>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text">Name</span>
                 </label>
                 <input
-                  name="email"
-                  type="email"
-                  placeholder="email"
+                  name="name"
+                  type="text"
+                  placeholder="Your Name"
                   className="input input-bordered"
                   required
                 />
@@ -34,6 +35,18 @@ const Login = () => {
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="Your Email"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Confrim Password</span>
                 </label>
                 <input
                   name="password"
@@ -52,11 +65,16 @@ const Login = () => {
                 <input
                   className="btn btn-primary"
                   type="submit"
-                  value="Login"
+                  value="Signup"
                 />
               </div>
             </form>
-            <p className="my-4 text-center">New to Car Doctors <Link  className="text-warning font-bold" to='/signup'>Signup</Link></p>
+            <p className="my-4 text-center">
+              Already have an account?{" "}
+              <Link className="text-warning font-bold" to="/login">
+                Login
+              </Link>
+            </p>
           </div>
         </div>
       </div>
@@ -64,4 +82,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
