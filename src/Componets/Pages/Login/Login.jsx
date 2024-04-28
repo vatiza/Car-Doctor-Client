@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import loginimg from "../../../assets/images/login/login.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProviders";
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -8,6 +11,12 @@ const Login = () => {
     const password = form.password.value;
     const loginValue = { email, password };
     console.log(loginValue);
+    signIn(email, password)
+      .then((result) => {
+        const loggeduser = result.user;
+        console.log(loggeduser);
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div>
@@ -56,7 +65,12 @@ const Login = () => {
                 />
               </div>
             </form>
-            <p className="my-4 text-center">New to Car Doctors <Link  className="text-warning font-bold" to='/signup'>Signup</Link></p>
+            <p className="my-4 text-center">
+              New to Car Doctors{" "}
+              <Link className="text-warning font-bold" to="/signup">
+                Signup
+              </Link>
+            </p>
           </div>
         </div>
       </div>
