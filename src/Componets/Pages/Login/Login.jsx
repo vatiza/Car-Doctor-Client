@@ -1,18 +1,57 @@
 import loginimg from "../../../assets/images/login/login.svg";
 const Login = () => {
+  const handleLogin=event=>{
+    event.preventDefault();
+    const form=event.target;
+    const email=form.email.value;
+    const password=form.password.value;
+    const loginValue={email,password};
+    console.log(loginValue);
+  }
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
-          <img src={loginimg} className="max-w-sm rounded-lg shadow-2xl" />
-          <div>
-            <h1 className="text-5xl font-bold">Box Office News!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
-            <button className="btn btn-primary">Get Started</button>
+          <div className=" mr-12 w-1/2">
+            <img src={loginimg} alt="" />
+          </div>
+          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <form onSubmit={handleLogin} className="card-body">
+              <h1 className="text-3xl font-bold">Login now!</h1>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                name="email"
+                  type="email"
+                  placeholder="email"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                name="password"
+                  type="password"
+                  placeholder="password"
+                  className="input input-bordered"
+                  required
+                />
+                <label className="label">
+                  <a href="#" className="label-text-alt link link-hover">
+                    Forgot password?
+                  </a>
+                </label>
+              </div>
+              <div className="form-control mt-6">
+               
+                <input className="btn btn-primary" type="submit" value='Login' />
+              </div>
+            </form>
           </div>
         </div>
       </div>
