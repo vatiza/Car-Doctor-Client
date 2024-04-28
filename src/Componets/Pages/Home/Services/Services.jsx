@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import ServicesCards from "./ServicesCards";
 
@@ -25,6 +24,9 @@ const Services = () => {
             <ServicesCards key={service._id} service={service}></ServicesCards>
           ))}
         </div>
+        <button className="btn btn-outline btn-warning  mt-6 syc">
+          Load More
+        </button>
       </div>
     </div>
   );
