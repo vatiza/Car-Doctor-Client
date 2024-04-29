@@ -1,8 +1,10 @@
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Checkout = () => {
   const services = useLoaderData();
-  const { title, _id, price } = services;
+  const { title, _id, price, img } = services;
+
   const handleOrder = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -11,16 +13,37 @@ const Checkout = () => {
     const phone = form.phone.value;
     const email = form.email.value;
     const msg = form.msg.value;
-    const order = {
+    const date = form.date.value;
+    const orders = {
       customerFname: fname,
       customerLname: lname,
       phone,
       email,
+      img,
       msg,
-      service: _id,
+      services: title,
+      serviceId: _id,
       price,
+      date,
     };
-    console.log(order);
+    console.log(orders);
+    fetch("http://localhost:5000/orders", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(orders),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        Swal.fire({
+          title: "Success!",
+          text: "Your Order is Pending",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      });
   };
   return (
     <div>
@@ -69,6 +92,15 @@ const Checkout = () => {
           className="textarea textarea-bordered h-20"
           placeholder="Your Message"
         ></textarea>
+        <div className="form-control">
+          <input
+            name="date"
+            type="date"
+            placeholder="Your Date"
+            className="input input-bordered"
+            required
+          />
+        </div>
         <div className="form-control mt-6">
           <input
             className="btn btn-block btn-warning"

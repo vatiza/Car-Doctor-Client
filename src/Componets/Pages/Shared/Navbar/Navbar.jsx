@@ -2,7 +2,15 @@ import { Link } from "react-router-dom";
 import logo from "../../../../assets/logo.svg";
 import { SlHandbag } from "react-icons/sl";
 import { IoSearchOutline } from "react-icons/io5";
+import { useContext } from "react";
+import { AuthContext } from "../../../../Providers/AuthProviders";
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
+  const hanleLogout = () => {
+    logout()
+      .then(() => {})
+      .then((error) => console.log(error));
+  };
   const navbar = (
     <>
       <li>
@@ -22,7 +30,17 @@ const Navbar = () => {
       <li>
         {" "}
         <Link to="/">Contact</Link>
-      </li>
+      </li>{" "}
+      {user?.email ? (
+        <li>
+          {" "}
+          <button onClick={hanleLogout}>Logout</button>
+        </li>
+      ) : (
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      )}
     </>
   );
   return (
