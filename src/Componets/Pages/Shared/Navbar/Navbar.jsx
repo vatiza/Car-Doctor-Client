@@ -32,10 +32,14 @@ const Navbar = () => {
         <Link to="/">Contact</Link>
       </li>{" "}
       {user?.email ? (
-        <li>
-          {" "}
-          <button onClick={hanleLogout}>Logout</button>
-        </li>
+        <>
+          <li>
+            <Link to="/bookings">My Bookings</Link>
+          </li>
+          <li>
+            <button onClick={hanleLogout}>Logout</button>
+          </li>
+        </>
       ) : (
         <li>
           <Link to="/login">Login</Link>

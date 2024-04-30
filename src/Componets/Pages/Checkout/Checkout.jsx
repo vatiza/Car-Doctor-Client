@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../Providers/AuthProviders";
 
 const Checkout = () => {
   const services = useLoaderData();
+  const { user } = useContext(AuthContext);
+
   const { title, _id, price, img } = services;
 
   const handleOrder = (event) => {
@@ -81,6 +85,7 @@ const Checkout = () => {
             <input
               name="email"
               type="email"
+              defaultValue={user?.email}
               placeholder="Your Email"
               className="input input-bordered"
               required
