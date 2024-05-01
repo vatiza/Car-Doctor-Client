@@ -10,7 +10,7 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     const loginValue = { email, password };
-
+console.log(loginValue)
     signIn(email, password)
       .then((result) => {
         const loggeduser = result.user;

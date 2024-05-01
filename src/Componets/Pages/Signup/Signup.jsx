@@ -12,11 +12,11 @@ const Signup = () => {
     const email = form.email.value;
     const password = form.password.value;
     const loginValue = { name, email, password };
-  
+  console.log(loginValue)
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-    
+    console.log(user)
       })
       .catch((error) => {
         console.log(error);
