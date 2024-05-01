@@ -23,7 +23,7 @@ const Login = () => {
         const loggeduser = result.user;
 
         console.log(loggeduser);
-        // navigate(from, { replace: true });
+
         fetch("http://localhost:5000/jwt", {
           method: "POST",
           headers: {
@@ -35,6 +35,8 @@ const Login = () => {
           .then((data) => {
             console.log("jwt respons", data);
             //! Warning localstorage  is not best save token. the best place is  HTTP cookie
+            localStorage.setItem("car-doctor-access-token", data.token);
+            navigate(from, { replace: true });
           });
       })
       .catch((error) => console.log(error));
