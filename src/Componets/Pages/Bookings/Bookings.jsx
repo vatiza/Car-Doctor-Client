@@ -8,7 +8,14 @@ const Bookings = () => {
   const url = `http://localhost:5000/orders?email=${user?.email}`;
 
   useEffect(() => {
-    fetch(url)
+    fetch(url, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem(
+          "car-doctor-access-token"
+        )}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setBookings(data);
@@ -23,7 +30,6 @@ const Bookings = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-         
           if (data.deletedCount > 0) {
             alert("delete successfull");
             const remaining = bookings.filter((booking) => booking._id !== id);
