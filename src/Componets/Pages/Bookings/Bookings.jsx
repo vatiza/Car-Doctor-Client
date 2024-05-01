@@ -5,7 +5,7 @@ import BookingTable from "./BookingTable";
 const Bookings = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
-  const url = `http://localhost:5000/orders?email=${user?.email}`;
+  const url = `https://car-doctor-js-server.vercel.app/orders?email=${user?.email}`;
 
   useEffect(() => {
     fetch(url, {
@@ -25,7 +25,7 @@ const Bookings = () => {
   const handleRemove = (id) => {
     const proceed = confirm("Are you sure you want to delete");
     if (proceed) {
-      fetch(`http://localhost:5000/orders/${id}`, {
+      fetch(`https://car-doctor-js-server.vercel.app/orders/${id}`, {
         method: "delete",
       })
         .then((res) => res.json())
@@ -39,7 +39,7 @@ const Bookings = () => {
     }
   };
   const handleConfrim = (id) => {
-    fetch(`http://localhost:5000/orders/${id}`, {
+    fetch(`https://car-doctor-js-server.vercel.app/orders/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

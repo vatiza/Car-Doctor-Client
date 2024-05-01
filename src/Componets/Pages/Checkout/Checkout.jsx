@@ -30,8 +30,8 @@ const Checkout = () => {
       price,
       date,
     };
-  
-    fetch("http://localhost:5000/orders", {
+
+    fetch("https://car-doctor-js-server.vercel.app/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",

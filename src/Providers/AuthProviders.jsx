@@ -35,7 +35,7 @@ const AuthProviders = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
       if (currentUser) {
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://car-doctor-js-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "contenct-type": "application/json",
