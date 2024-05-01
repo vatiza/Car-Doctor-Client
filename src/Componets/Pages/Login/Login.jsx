@@ -21,8 +21,21 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const loggeduser = result.user;
+
         console.log(loggeduser);
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "contenct-type": "application/json",
+          },
+          body: JSON.stringify(loggeduser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("jwt respons", data);
+            //! Warning localstorage  is not best save token. the best place is  HTTP cookie
+          });
       })
       .catch((error) => console.log(error));
   };
