@@ -24,20 +24,7 @@ const Login = () => {
 
         console.log(loggeduser);
 
-        fetch("http://localhost:5000/jwt", {
-          method: "POST",
-          headers: {
-            "contenct-type": "application/json",
-          },
-          body: JSON.stringify(loggeduser),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log("jwt respons", data);
-            //! Warning localstorage  is not best save token. the best place is  HTTP cookie
-            localStorage.setItem("car-doctor-access-token", data.token);
-            navigate(from, { replace: true });
-          });
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };

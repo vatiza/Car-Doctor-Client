@@ -9,7 +9,7 @@ const Navbar = () => {
   const hanleLogout = () => {
     logout()
       .then(() => {
-        localStorage.removeItem("car-doctor-access-token");
+       
       })
       .then((error) => console.log(error));
   };
