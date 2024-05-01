@@ -1,22 +1,47 @@
-import { Link } from "react-router-dom";
-import loginimg from "../../../assets/images/login/login.svg";
+import { signInWithPopup } from "firebase/auth";
 import { useContext } from "react";
+import { FaGithub, FaGoogle, FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProviders";
+import loginimg from "../../../assets/images/login/login.svg";
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, setUser, auth, googlePovider, githubProvider } =
+    useContext(AuthContext);
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
     const loginValue = { email, password };
-console.log(loginValue)
+    console.log(loginValue);
     signIn(email, password)
       .then((result) => {
         const loggeduser = result.user;
         console.log(loggeduser);
       })
       .catch((error) => console.log(error));
+  };
+  const handleGoogleSign = () => {
+    signInWithPopup(auth, googlePovider)
+      .then((result) => {
+        const loginUser = result.user;
+        console.log(loginUser);
+        setUser(loginUser);
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+      });
+  };
+  const handleGithubSign = () => {
+    signInWithPopup(auth, githubProvider)
+      .then((result) => {
+        const loginUser = result.user;
+        console.log(loginUser);
+        setUser(loginUser);
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+      });
   };
   return (
     <div>
@@ -65,6 +90,24 @@ console.log(loginValue)
                 />
               </div>
             </form>
+            <div className="text-center">
+              <p className="mb-2">Or Sign in With</p>
+              <button
+                onClick={handleGoogleSign}
+                className="me-4 btn btn-circle hover:text-green-500"
+              >
+                <FaGoogle />
+              </button>
+              <button
+                onClick={handleGithubSign}
+                className="me-4 btn btn-circle hover:text-green-500"
+              >
+                <FaGithub />
+              </button>
+              <button className="me-4 btn btn-circle  hover:text-green-500">
+                <FaLinkedin />
+              </button>
+            </div>
             <p className="my-4 text-center">
               New to Car Doctors{" "}
               <Link className="text-warning font-bold" to="/signup">

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import loginimg from "../../../assets/images/login/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProviders";
+import { FaGithub, FaGoogle, FaLinkedin } from "react-icons/fa";
 const Signup = () => {
   const { createUser } = useContext(AuthContext);
 
@@ -12,11 +13,11 @@ const Signup = () => {
     const email = form.email.value;
     const password = form.password.value;
     const loginValue = { name, email, password };
-  console.log(loginValue)
+    console.log(loginValue);
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-    console.log(user)
+        console.log(user);
       })
       .catch((error) => {
         console.log(error);
@@ -81,6 +82,18 @@ const Signup = () => {
                 />
               </div>
             </form>
+            <div className="text-center">
+              <p className="mb-2">Or Signup With</p>
+              <button className="me-4 btn btn-circle hover:text-green-500">
+                <FaGoogle />
+              </button>
+              <button className="me-4 btn btn-circle hover:text-green-500">
+                <FaGithub />
+              </button>
+              <button className="me-4 btn btn-circle  hover:text-green-500">
+                <FaLinkedin />
+              </button>
+            </div>
             <p className="my-4 text-center">
               Already have an account?{" "}
               <Link className="text-warning font-bold" to="/login">
