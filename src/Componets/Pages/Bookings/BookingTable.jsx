@@ -1,7 +1,15 @@
-const BookingTable = ({ booking,handleRemove }) => {
-  const { _id, img, customerFname, email, date, price, services } = booking;
-
-
+const BookingTable = ({ booking, handleRemove, handleConfrim }) => {
+  const {
+    _id,
+    img,
+    customerFname,
+    customerLname,
+    email,
+    date,
+    price,
+    services,
+    status,
+  } = booking;
   return (
     <tr>
       <th>
@@ -41,13 +49,24 @@ const BookingTable = ({ booking,handleRemove }) => {
         </div>
       </td>
       <td>
-        {customerFname}
+        {customerFname} {customerLname}
         <br />
         <span className="badge badge-ghost badge-sm">{email}</span>
       </td>
       <td>{date}</td>
       <th>
-        <button className="btn btn-ghost btn-xs">details</button>
+        {status === "Confirm" ? (
+          <span className="font-bold text-green-700">Confrimed</span>
+        ) : (
+          <button
+            onClick={() => {
+              handleConfrim(_id);
+            }}
+            className="btn btn-ghost btn-xs"
+          >
+            Please Confrim
+          </button>
+        )}
       </th>
     </tr>
   );
