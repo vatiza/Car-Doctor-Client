@@ -1,10 +1,14 @@
 import { signInWithPopup } from "firebase/auth";
 import { useContext } from "react";
 import { FaGithub, FaGoogle, FaLinkedin } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProviders";
 import loginimg from "../../../assets/images/login/login.svg";
 const Login = () => {
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const navigate = useNavigate();
+
   const { signIn, setUser, auth, googlePovider, githubProvider } =
     useContext(AuthContext);
   const handleLogin = (event) => {
@@ -18,6 +22,7 @@ const Login = () => {
       .then((result) => {
         const loggeduser = result.user;
         console.log(loggeduser);
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };
@@ -27,6 +32,7 @@ const Login = () => {
         const loginUser = result.user;
         console.log(loginUser);
         setUser(loginUser);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log("error", error.message);
@@ -38,6 +44,7 @@ const Login = () => {
         const loginUser = result.user;
         console.log(loginUser);
         setUser(loginUser);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log("error", error.message);
