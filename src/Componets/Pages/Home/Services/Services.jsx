@@ -13,7 +13,7 @@ const Services = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/services?search=${search}&sort=${
+      `https://car-doctor-js-server.vercel.app/services?search=${search}&sort=${
         asc ? "asc" : "desc"
       }`
     )
